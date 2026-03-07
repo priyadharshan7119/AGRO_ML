@@ -26,6 +26,12 @@ season_encoder  = joblib.load("season_encoder.pkl")
 crop_encoder    = joblib.load("crop_encoder.pkl")
 
 
+# ── Simple In-Memory User Storage (Realistic for local testing) ──────────────
+USERS = [
+    {"name": "Demo User", "email": "demo@example.com", "password": "password123"}
+]
+
+
 @app.get("/")
 def home():
     return {"message": "AgroPredict API Running"}
@@ -584,6 +590,34 @@ def weather_endpoint(data: dict):
     }
 
 
+# ── Auth Endpoints ──────────────────────────────────────────────────────────
+@app.post("/signup")
+def signup_endpoint(data: dict):
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+
+    # Check if user exists
+    if any(u["email"] == email for u in USERS):
+        return {"success": False, "message": "User already exists"}
+
+    new_user = {"name": name, "email": email, "password": password}
+    USERS.append(new_user)
+    return {"success": True, "user": {"name": name, "email": email}}
+
+
+@app.post("/login")
+def login_endpoint(data: dict):
+    email = data.get("email")
+    password = data.get("password")
+
+    for user in USERS:
+        if user["email"] == email and user["password"] == password:
+            return {"success": True, "user": {"name": user["name"], "email": user["email"]}}
+
+    return {"success": False, "message": "Invalid email or password"}
+
+
 @app.get("/debug-weather")
 def debug_weather():
     """
@@ -707,12 +741,13 @@ def predict(data: dict):
         hist_conf  = historical_scores.get(name, 0.0)   # 0-100 from classifier
 
         # Blend: 60% environmental rules + 40% historical field data
-        blended_score = round(0.60 * env_result["score"] + 0.40 * hist_conf, 1)
-        env_result["score"]            = blended_score
+        env_score = env_result["score"]
+        blended_score = float(round(0.60 * env_score + 0.40 * hist_conf, 1))
+        env_result["score"] = blended_score
         env_result["historical_confidence"] = hist_conf
         env_result["explanation"] = (
             f"{name} scores {blended_score:.0f}/100 "
-            f"(climate match: {env_result['score']:.0f}, "
+            f"(climate match: {env_score:.0f}, "
             f"historical field data confidence: {hist_conf:.0f}%). "
         ) + env_result["explanation"].split(". ", 1)[-1]   # keep reasons tail
         scored.append(env_result)
@@ -722,13 +757,22 @@ def predict(data: dict):
 
 
     # Feature importance (from XGBoost feature analysis)
-    feature_importance = {
-        "rainfall":     0.30,
-        "soil_type":    0.25,
-        "temperature":  0.20,
-        "humidity":     0.15,
-        "season":       0.10
-    }
+    try:
+        # Get importances and map to FEATURES list:
+        # FEATURES = ["temperature", "rainfall", "humidity", "soil_enc", "season_enc"]
+        importances = model.feature_importances_
+        feature_importance = {
+            "temperature": float(importances[0]),
+            "rainfall":    float(importances[1]),
+            "humidity":    float(importances[2]),
+            "soil_type":   float(importances[3]),
+            "season":      float(importances[4])
+        }
+    except:
+        feature_importance = {
+            "rainfall": 0.30, "soil_type": 0.25, "temperature": 0.20,
+            "humidity": 0.15, "season": 0.10
+        }
 
     return {
         "predicted_yield": predicted_yield,

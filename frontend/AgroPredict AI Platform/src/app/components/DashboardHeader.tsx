@@ -58,16 +58,16 @@ export default function DashboardHeader({ user, onLogout, onNavigateHome, predic
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-3 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:shadow-md"
+            className="flex items-center gap-2 md:gap-3 px-2 md:px-4 py-1.5 md:py-2 bg-white/80 backdrop-blur-sm rounded-xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:shadow-md"
           >
-            <div className="w-9 h-9 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-semibold">
+            <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-semibold text-sm md:text-base">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="text-left hidden md:block">
               <div className="text-sm font-semibold text-gray-800">{user.name}</div>
               <div className="text-xs text-gray-500">{user.email}</div>
             </div>
-            <ChevronDown className={`w-4 h-4 text-gray-600 transition-transform duration-300 ${showProfileMenu ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-3 h-3 md:w-4 md:h-4 text-gray-600 transition-transform duration-300 ${showProfileMenu ? 'rotate-180' : ''}`} />
           </button>
 
           {/* Dropdown Menu */}

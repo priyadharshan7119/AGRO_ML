@@ -58,8 +58,8 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-3xl font-bold mb-2">Welcome Back</h2>
-            <p className="text-green-50">Sign in to access your AgroPredict AI dashboard</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Welcome Back</h2>
+            <p className="text-sm md:text-base text-green-50">Sign in to access your AgroPredict AI dashboard</p>
           </div>
 
           {/* Form */}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import PredictionDashboard from './components/PredictionDashboard';
 import ResultsPage from './components/ResultsPage';
@@ -51,6 +51,11 @@ export default function App() {
   const [predictionResult, setPredictionResult] = useState<PredictionResult | null>(null);
   const [user, setUser] = useState<UserData | null>(null);
   const [predictionHistory, setPredictionHistory] = useState<PredictionHistoryItem[]>([]);
+  
+  // Reset scroll position to top whenever current page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentPage]);
 
   const handleNavigate = (page: Page) => {
     setCurrentPage(page);

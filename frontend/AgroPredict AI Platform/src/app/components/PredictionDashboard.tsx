@@ -340,8 +340,8 @@ const handlePredict = async () => {
         )}
 
         {/* Main Content - Add top padding for fixed header */}
-        <div className="pt-24">
-          <div className="grid lg:grid-cols-2 gap-6">
+        <div className="pt-20 md:pt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column - Input Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -379,7 +379,7 @@ const handlePredict = async () => {
                 </div>
 
                 {/* Coordinates */}
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Latitude
@@ -390,7 +390,7 @@ const handlePredict = async () => {
                       value={latitude}
                       onChange={(e) => setLatitude(e.target.value)}
                       placeholder="11.0168"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
                     />
                   </div>
                   <div>
@@ -403,7 +403,7 @@ const handlePredict = async () => {
                       value={longitude}
                       onChange={(e) => setLongitude(e.target.value)}
                       placeholder="76.9558"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
                     />
                   </div>
                 </div>
@@ -416,7 +416,7 @@ const handlePredict = async () => {
                   <select
                     value={soilType}
                     onChange={(e) => setSoilType(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
                   >
                     <option value="loamy">Loamy</option>
                     <option value="clay">Clay</option>
@@ -435,7 +435,7 @@ const handlePredict = async () => {
                   <select
                     value={season}
                     onChange={(e) => setSeason(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
                   >
                     <option value="kharif">Kharif (Monsoon)</option>
                     <option value="rabi">Rabi (Winter)</option>
@@ -455,7 +455,7 @@ const handlePredict = async () => {
                     value={previousYield}
                     onChange={(e) => setPreviousYield(e.target.value)}
                     placeholder="3.5"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
                   />
                 </div>
 
@@ -580,7 +580,7 @@ const handlePredict = async () => {
 
           {/* Info Cards */}
           <motion.div
-            className="mt-6 grid md:grid-cols-3 gap-4"
+            className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 pb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}

@@ -74,8 +74,8 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin, onSignup
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-3xl font-bold mb-2">Create Account</h2>
-            <p className="text-emerald-50">Join AgroPredict AI and start predicting</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Create Account</h2>
+            <p className="text-sm md:text-base text-emerald-50">Join AgroPredict AI and start predicting</p>
           </div>
 
           {/* Form */}

@@ -41,7 +41,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
           />
         )}
 
-        <div className="pt-24">
+        <div className="pt-20 md:pt-24 px-2 md:px-0">
           {/* ── Main Prediction Card ── */}
           <motion.div
             className="mb-8"
@@ -49,31 +49,31 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <div className="bg-gradient-to-br from-green-500 via-emerald-600 to-teal-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-gradient-to-br from-green-500 via-emerald-600 to-teal-600 rounded-3xl p-6 md:p-8 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-              <div className="relative z-10 grid md:grid-cols-2 gap-8">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-8 h-8" />
-                    <span className="text-xl font-medium opacity-90">AI Predicted Yield</span>
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div className="text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <TrendingUp className="w-6 h-6 md:w-8 md:h-8" />
+                    <span className="text-lg md:text-xl font-medium opacity-90">AI Predicted Yield</span>
                   </div>
-                  <div className="text-6xl font-bold mb-2">{result.predicted_yield.toFixed(2)}</div>
-                  <div className="text-2xl opacity-90">Tons per Hectare</div>
+                  <div className="text-5xl md:text-6xl font-bold mb-2">{result.predicted_yield.toFixed(2)}</div>
+                  <div className="text-xl md:text-2xl opacity-90">Tons per Hectare</div>
                 </div>
                 <div className="flex items-center">
-                  <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 w-full">
+                  <div className="bg-white/20 backdrop-blur-md rounded-2xl p-5 md:p-6 w-full">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-medium">Model Accuracy</span>
-                      <Award className="w-6 h-6" />
+                      <span className="text-base md:text-lg font-medium">Model Accuracy</span>
+                      <Award className="w-5 h-5 md:w-6 md:h-6" />
                     </div>
-                    <div className="text-5xl font-bold mb-2">{result.model_accuracy}%</div>
-                    <div className="w-full bg-white/30 rounded-full h-3">
+                    <div className="text-4xl md:text-5xl font-bold mb-2">{result.model_accuracy}%</div>
+                    <div className="w-full bg-white/30 rounded-full h-2 md:h-3">
                       <div
-                        className="bg-white rounded-full h-3 transition-all duration-1000"
+                        className="bg-white rounded-full h-2 md:h-3 transition-all duration-1000"
                         style={{ width: `${result.model_accuracy}%` }}
                       ></div>
                     </div>
-                    <p className="text-xs mt-2 opacity-80">XGBoost model trained on Indian agri-climate data</p>
+                    <p className="text-[10px] md:text-xs mt-2 opacity-80">XGBoost model trained on Indian agri-climate data</p>
                   </div>
                 </div>
               </div>
@@ -125,8 +125,8 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
-              <Sprout className="w-8 h-8 text-green-600" />
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+              <Sprout className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
               Crop Recommendations
             </h2>
             <p className="text-gray-500 mb-6 text-sm">
@@ -159,7 +159,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
 
                     <div className="flex-1 p-5">
                       {/* Header row */}
-                      <div className="flex flex-wrap items-start gap-3 mb-3">
+                      <div className="flex flex-col sm:flex-row items-start gap-3 mb-3">
                         <span className="text-4xl">{crop.icon}</span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center flex-wrap gap-2">
@@ -171,9 +171,9 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                           <p className="text-sm text-gray-500 mt-0.5">{crop.description}</p>
                         </div>
                         {/* Score ring */}
-                        <div className="flex-shrink-0 text-center">
+                        <div className="flex sm:flex-col items-center gap-2 sm:gap-0 sm:flex-shrink-0 text-center bg-gray-50 sm:bg-transparent p-2 sm:p-0 rounded-lg w-full sm:w-auto">
                           <div
-                            className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg text-white shadow-md"
+                            className="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center font-bold text-base sm:text-lg text-white shadow-md"
                             style={{
                               background: crop.score >= 70
                                 ? 'linear-gradient(135deg,#22c55e,#15803d)'
@@ -184,7 +184,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                           >
                             {crop.score.toFixed(0)}
                           </div>
-                          <div className="text-xs text-gray-500 mt-1">Score</div>
+                          <div className="text-xs text-gray-500 sm:mt-1">Suitability Score</div>
                         </div>
                       </div>
 
@@ -212,29 +212,29 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                       </div>
 
                       {/* Yield + AI explanation */}
-                      <div className="grid md:grid-cols-3 gap-3 mb-3">
-                        <div className="bg-green-50 rounded-xl p-3 text-center">
-                          <div className="text-xs text-gray-500 mb-0.5">Est. Yield</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                        <div className="bg-green-50 rounded-xl p-3 text-center flex sm:block items-center justify-between">
+                          <div className="text-xs text-gray-500 sm:mb-0.5">Est. Yield</div>
                           <div className="text-xl font-bold text-green-700">{crop.expected_yield.toFixed(1)} T/Ha</div>
                         </div>
-                        <div className="md:col-span-2 bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-2">
+                        <div className="sm:col-span-2 bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-2">
                           <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
                           <p className="text-xs text-blue-800 leading-relaxed">{crop.explanation}</p>
                         </div>
                       </div>
 
                       {/* Benefits & Warnings */}
-                      <div className="grid md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {crop.benefits.length > 0 && (
                           <div>
-                            <div className="text-xs font-semibold text-green-700 mb-1 uppercase tracking-wide">
+                            <div className="text-[10px] font-bold text-green-700 mb-2 uppercase tracking-wider">
                               ✅ Why it fits
                             </div>
-                            <ul className="space-y-1">
+                            <ul className="space-y-2">
                               {crop.benefits.map((b, i) => (
-                                <li key={i} className="flex items-start gap-1.5 text-xs text-gray-600">
+                                <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
                                   <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0 mt-0.5" />
-                                  {b}
+                                  <span>{b}</span>
                                 </li>
                               ))}
                             </ul>
@@ -242,14 +242,14 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                         )}
                         {crop.warnings.length > 0 && (
                           <div>
-                            <div className="text-xs font-semibold text-amber-700 mb-1 uppercase tracking-wide">
+                            <div className="text-[10px] font-bold text-amber-700 mb-2 uppercase tracking-wider">
                               ⚠️ Watch out for
                             </div>
-                            <ul className="space-y-1">
+                            <ul className="space-y-2">
                               {crop.warnings.map((w, i) => (
-                                <li key={i} className="flex items-start gap-1.5 text-xs text-gray-600">
+                                <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
                                   <AlertTriangle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
-                                  {w}
+                                  <span>{w}</span>
                                 </li>
                               ))}
                             </ul>
@@ -270,13 +270,13 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             transition={{ delay: 0.7 }}
           >
             <div className="bg-white/50 backdrop-blur-xl rounded-2xl p-8 border border-white/60 shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <Award className="w-8 h-8 text-green-600" />
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+                <Award className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
                 Explainable AI — Feature Importance
               </h2>
               <p className="text-gray-500 mb-6 text-sm">
                 The XGBoost model analysed {featureData.length} environmental features.
-                Here's how much each one influenced the yield prediction for your location.
+                Here's how much each one influenced the prediction.
               </p>
 
               <div className="h-72 mb-6">
@@ -344,20 +344,20 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
 
           {/* ── Action Buttons ── */}
           <motion.div
-            className="mt-8 flex gap-4 justify-center"
+            className="mt-8 mb-12 flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
             <button
               onClick={() => onNavigate('dashboard')}
-              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:shadow-xl transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:shadow-xl transition-all duration-300"
             >
               New Prediction
             </button>
             <button
               onClick={() => onNavigate('landing')}
-              className="px-8 py-4 bg-white text-green-600 rounded-xl font-medium border-2 border-green-500 hover:bg-green-50 transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-green-600 rounded-xl font-medium border-2 border-green-500 hover:bg-green-50 transition-all duration-300"
             >
               Back to Home
             </button>
