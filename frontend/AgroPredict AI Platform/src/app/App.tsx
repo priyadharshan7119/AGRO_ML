@@ -87,7 +87,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50/60 to-teal-50">
       {currentPage === 'landing' && (
         <LandingPage 
           onNavigate={handleNavigate}

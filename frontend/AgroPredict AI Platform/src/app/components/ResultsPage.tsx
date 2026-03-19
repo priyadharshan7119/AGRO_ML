@@ -30,7 +30,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
   ];
 
   return (
-    <div className="min-h-screen py-8 px-6">
+    <div className="min-h-screen py-8 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {user && (
           <DashboardHeader
@@ -87,7 +87,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
               <Cloud className="w-6 h-6 text-green-600" />
               Historical Climate Data Used for Prediction
             </h2>
@@ -125,7 +125,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
               <Sprout className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
               Crop Recommendations
             </h2>
@@ -137,7 +137,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
               {result.top_crops.map((crop, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white/60 backdrop-blur-xl rounded-2xl border border-white/70 shadow-xl overflow-hidden"
+                  className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.09)] hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.12)] transition-shadow overflow-hidden"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 + index * 0.08 }}
@@ -163,12 +163,12 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                         <span className="text-4xl">{crop.icon}</span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center flex-wrap gap-2">
-                            <h3 className="text-xl font-bold text-gray-800">{crop.crop}</h3>
+                             <h3 className="text-xl font-bold text-gray-800">{crop.crop}</h3>
                             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${RANK_STYLES[index].badge}`}>
                               {RANK_STYLES[index].label}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-500 mt-0.5">{crop.description}</p>
+                           <p className="text-sm text-gray-500 mt-0.5">{crop.description}</p>
                         </div>
                         {/* Score ring */}
                         <div className="flex sm:flex-col items-center gap-2 sm:gap-0 sm:flex-shrink-0 text-center bg-gray-50 sm:bg-transparent p-2 sm:p-0 rounded-lg w-full sm:w-auto">
@@ -190,11 +190,11 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
 
                       {/* Score bar */}
                       <div className="mb-3">
-                        <div className="flex justify-between text-xs text-gray-500 mb-1">
-                          <span>Suitability</span>
-                          <span className="font-semibold text-gray-700">{crop.score.toFixed(0)} / 100</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
+                         <div className="flex justify-between text-xs text-gray-500 mb-1">
+                           <span>Suitability</span>
+                           <span className="font-semibold text-gray-700">{crop.score.toFixed(0)} / 100</span>
+                         </div>
+                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <motion.div
                             className="rounded-full h-2"
                             style={{
@@ -213,13 +213,13 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
 
                       {/* Yield + AI explanation */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                        <div className="bg-green-50 rounded-xl p-3 text-center flex sm:block items-center justify-between">
-                          <div className="text-xs text-gray-500 sm:mb-0.5">Est. Yield</div>
-                          <div className="text-xl font-bold text-green-700">{crop.expected_yield.toFixed(1)} T/Ha</div>
-                        </div>
-                        <div className="sm:col-span-2 bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-2">
-                          <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                          <p className="text-xs text-blue-800 leading-relaxed">{crop.explanation}</p>
+                         <div className="bg-green-50 rounded-xl p-3 text-center flex sm:block items-center justify-between">
+                           <div className="text-xs text-gray-500 sm:mb-0.5">Est. Yield</div>
+                           <div className="text-xl font-bold text-green-700">{crop.expected_yield.toFixed(1)} T/Ha</div>
+                         </div>
+                         <div className="sm:col-span-2 bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-2">
+                           <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                           <p className="text-xs text-blue-800 leading-relaxed">{crop.explanation}</p>
                         </div>
                       </div>
 
@@ -231,8 +231,8 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                               ✅ Why it fits
                             </div>
                             <ul className="space-y-2">
-                              {crop.benefits.map((b, i) => (
-                                <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
+                               {crop.benefits.map((b, i) => (
+                                 <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
                                   <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0 mt-0.5" />
                                   <span>{b}</span>
                                 </li>
@@ -246,8 +246,8 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
                               ⚠️ Watch out for
                             </div>
                             <ul className="space-y-2">
-                              {crop.warnings.map((w, i) => (
-                                <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
+                               {crop.warnings.map((w, i) => (
+                                 <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
                                   <AlertTriangle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
                                   <span>{w}</span>
                                 </li>
@@ -269,8 +269,8 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
           >
-            <div className="bg-white/50 backdrop-blur-xl rounded-2xl p-8 border border-white/60 shadow-xl">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1)]">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 flex items-center gap-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 <Award className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
                 Explainable AI — Feature Importance
               </h2>
@@ -282,12 +282,12 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
               <div className="h-72 mb-6">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={featureData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                    <XAxis dataKey="name" angle={-40} textAnchor="end" height={70} tick={{ fill: '#6b7280', fontSize: 12 }} />
-                    <YAxis label={{ value: 'Importance (%)', angle: -90, position: 'insideLeft', fill: '#6b7280' }} tick={{ fill: '#6b7280' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(107,114,128,0.2)" />
+                    <XAxis dataKey="name" angle={-40} textAnchor="end" height={70} tick={{ fill: '#9ca3af', fontSize: 12 }} />
+                    <YAxis label={{ value: 'Importance (%)', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} tick={{ fill: '#9ca3af' }} />
                     <Tooltip
                       formatter={(value: number) => [`${value.toFixed(1)}%`, 'Importance']}
-                      contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                      contentStyle={{ backgroundColor: 'rgba(17,24,39,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#f1f5f9' }}
                     />
                     <Bar dataKey="value" radius={[8, 8, 0, 0]}>
                       {featureData.map((entry, idx) => (
@@ -300,7 +300,7 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
 
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 {featureData.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-4 bg-white/70 rounded-xl p-4">
+                  <div key={index} className="flex items-center gap-4 bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <div className="w-4 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: feature.color }}></div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
@@ -351,13 +351,13 @@ export default function ResultsPage({ result, onNavigate, user, onLogout, predic
           >
             <button
               onClick={() => onNavigate('dashboard')}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:shadow-xl transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold hover:shadow-xl hover:shadow-green-500/25 transition-all duration-300"
             >
               New Prediction
             </button>
             <button
               onClick={() => onNavigate('landing')}
-              className="w-full sm:w-auto px-8 py-4 bg-white text-green-600 rounded-xl font-medium border-2 border-green-500 hover:bg-green-50 transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-green-600 rounded-xl font-semibold border-2 border-green-500 hover:bg-green-50 transition-all duration-300"
             >
               Back to Home
             </button>

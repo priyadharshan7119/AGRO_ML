@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { MapPin, Cloud, Droplets, Thermometer, Wind, Sprout, ArrowLeft, Loader2, Navigation } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { MapPin, Cloud, Droplets, Thermometer, Wind, Sprout, ArrowLeft, Loader2, Navigation, ChevronDown, Check } from 'lucide-react';
 import type { PredictionResult, UserData, PredictionHistoryItem } from '../App';
 import DashboardHeader from './DashboardHeader';
 
@@ -327,7 +327,7 @@ const handlePredict = async () => {
 };
 
   return (
-    <div className="min-h-screen py-8 px-6">
+    <div className="min-h-screen py-8 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         {user && (
@@ -348,8 +348,8 @@ const handlePredict = async () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="bg-white/50 backdrop-blur-xl rounded-2xl p-6 border border-white/60 shadow-xl">
-                <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1)]">
+                <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   <MapPin className="w-6 h-6 text-green-600" />
                   Location & Parameters
                 </h2>
@@ -390,7 +390,7 @@ const handlePredict = async () => {
                       value={latitude}
                       onChange={(e) => setLatitude(e.target.value)}
                       placeholder="11.0168"
-                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
+                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/60 bg-white text-gray-800 placeholder-gray-400 transition-colors"
                     />
                   </div>
                   <div>
@@ -403,7 +403,7 @@ const handlePredict = async () => {
                       value={longitude}
                       onChange={(e) => setLongitude(e.target.value)}
                       placeholder="76.9558"
-                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
+                      className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/60 bg-white text-gray-800 placeholder-gray-400 transition-colors"
                     />
                   </div>
                 </div>
@@ -413,18 +413,18 @@ const handlePredict = async () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Soil Type
                   </label>
-                  <select
+                  <CustomDropdown
                     value={soilType}
-                    onChange={(e) => setSoilType(e.target.value)}
-                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
-                  >
-                    <option value="loamy">Loamy</option>
-                    <option value="clay">Clay</option>
-                    <option value="sandy">Sandy</option>
-                    <option value="silty">Silty</option>
-                    <option value="peaty">Peaty</option>
-                    <option value="chalky">Chalky</option>
-                  </select>
+                    onChange={setSoilType}
+                    options={[
+                      { value: 'loamy', label: 'Loamy' },
+                      { value: 'clay', label: 'Clay' },
+                      { value: 'sandy', label: 'Sandy' },
+                      { value: 'silty', label: 'Silty' },
+                      { value: 'peaty', label: 'Peaty' },
+                      { value: 'chalky', label: 'Chalky' },
+                    ]}
+                  />
                 </div>
 
                 {/* Season */}
@@ -432,16 +432,16 @@ const handlePredict = async () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Season
                   </label>
-                  <select
+                  <CustomDropdown
                     value={season}
-                    onChange={(e) => setSeason(e.target.value)}
-                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
-                  >
-                    <option value="kharif">Kharif (Monsoon)</option>
-                    <option value="rabi">Rabi (Winter)</option>
-                    <option value="zaid">Zaid (Summer)</option>
-                    <option value="whole_year">Whole Year</option>
-                  </select>
+                    onChange={setSeason}
+                    options={[
+                      { value: 'kharif', label: 'Kharif (Monsoon)' },
+                      { value: 'rabi', label: 'Rabi (Winter)' },
+                      { value: 'zaid', label: 'Zaid (Summer)' },
+                      { value: 'whole_year', label: 'Whole Year' },
+                    ]}
+                  />
                 </div>
 
                 {/* Previous Yield */}
@@ -455,7 +455,7 @@ const handlePredict = async () => {
                     value={previousYield}
                     onChange={(e) => setPreviousYield(e.target.value)}
                     placeholder="3.5"
-                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white/50"
+                    className="w-full px-4 py-3 md:py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/60 bg-white text-gray-800 placeholder-gray-400 transition-colors"
                   />
                 </div>
 
@@ -488,8 +488,8 @@ const handlePredict = async () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <div className="bg-white/50 backdrop-blur-xl rounded-2xl p-6 border border-white/60 shadow-xl">
-                <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1)]">
+                <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   <Cloud className="w-6 h-6 text-green-600" />
                   Real-Time Environmental Data
                 </h2>
@@ -567,7 +567,7 @@ const handlePredict = async () => {
                     </div>
 
                     {/* Data Source Info */}
-                    <div className="bg-gray-100 rounded-lg p-3 text-center">
+                    <div className="bg-gray-50 rounded-lg p-3 text-center border border-gray-100">
                       <p className="text-xs text-gray-600">
                         📡 Data fetched from Weather API, NASA POWER, and SoilGrids
                       </p>
@@ -585,21 +585,96 @@ const handlePredict = async () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="bg-white/50 backdrop-blur-xl rounded-xl p-4 border border-white/60 text-center">
-              <div className="text-2xl font-bold text-green-600 mb-1">XGBoost</div>
-              <div className="text-sm text-gray-600">ML Algorithm</div>
-            </div>
-            <div className="bg-white/50 backdrop-blur-xl rounded-xl p-4 border border-white/60 text-center">
-              <div className="text-2xl font-bold text-green-600 mb-1">Real-Time</div>
-              <div className="text-sm text-gray-600">Weather Integration</div>
-            </div>
-            <div className="bg-white/50 backdrop-blur-xl rounded-xl p-4 border border-white/60 text-center">
-              <div className="text-2xl font-bold text-green-600 mb-1">92%+</div>
-              <div className="text-sm text-gray-600">Prediction Accuracy</div>
-            </div>
+            {[{val:'XGBoost', lbl:'ML Algorithm'},{val:'Real-Time', lbl:'Weather Integration'},{val:'92%+', lbl:'Prediction Accuracy'}].map((info, i) => (
+              <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08)] text-center">
+                <div className="text-2xl font-bold text-green-600 mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>{info.val}</div>
+                <div className="text-sm text-gray-500">{info.lbl}</div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Custom Select / Dropdown Component
+function CustomDropdown({
+  value,
+  onChange,
+  options,
+  placeholder = "Select an option"
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  options: { value: string; label: string }[];
+  placeholder?: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    }
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [isOpen]);
+
+  const selectedOption = options.find(opt => opt.value === value);
+
+  return (
+    <div className="relative w-full" ref={containerRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-full px-4 py-3 md:py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-500/60 transition-colors flex items-center justify-between text-left shadow-sm ${
+          isOpen ? 'border-green-500 ring-2 ring-green-500/20 bg-green-50/30' : 'border-gray-200 bg-white hover:border-green-300'
+        }`}
+      >
+        <span className={selectedOption ? 'text-gray-800' : 'text-gray-400 font-medium'}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-green-500' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="absolute z-50 w-full mt-2 bg-white rounded-xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden py-1"
+          >
+            <div className="max-h-60 overflow-y-auto">
+              {options.map((option) => {
+                const isSelected = option.value === value;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => {
+                      onChange(option.value);
+                      setIsOpen(false);
+                    }}
+                    className={`w-full px-4 py-2.5 text-left flex items-center justify-between transition-colors ${
+                      isSelected ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span>{option.label}</span>
+                    {isSelected && <Check className="w-4 h-4 text-green-600" />}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

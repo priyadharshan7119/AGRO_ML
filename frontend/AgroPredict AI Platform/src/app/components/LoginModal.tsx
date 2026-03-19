@@ -44,7 +44,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
         onClick={onClose}
       >
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden"
+          className="bg-white rounded-3xl shadow-[0_25px_60px_-12px_rgba(0,0,0,0.25)] w-full max-w-md overflow-hidden"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -77,7 +77,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your.email@example.com"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/60 bg-white text-gray-800 placeholder-gray-400 transition-colors"
                 />
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-12 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full pl-10 pr-12 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500/60 bg-white text-gray-800 placeholder-gray-400 transition-colors"
                 />
                 <button
                   type="button"
@@ -131,7 +131,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
             {/* Divider */}
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-gray-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-4 bg-white text-gray-500">or continue with</span>
@@ -142,7 +142,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-700 flex items-center justify-center gap-2"
+                className="py-2 px-4 border border-gray-200 bg-white rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-700 flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -154,7 +154,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup, onLoginS
               </button>
               <button
                 type="button"
-                className="py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-700 flex items-center justify-center gap-2"
+                className="py-2 px-4 border border-gray-200 bg-white rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-700 flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
