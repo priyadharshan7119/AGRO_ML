@@ -7,6 +7,8 @@ AgroPredict AI is a full-stack, AI-powered smart agriculture platform designed t
 ![FastAPI](https://img.shields.io/badge/Backend-FastAPI-teal)
 ![Machine Learning](https://img.shields.io/badge/AI-XGBoost-orange)
 
+### 🌐 Live Demo: [https://agro-ml-liart.vercel.app](https://agro-ml-liart.vercel.app)
+
 ## ✨ Key Features
 - **🌍 Real-Time Location & Weather Data:** Automatically fetches live coordinates using your device's GPS and retrieves local environmental data (rainfall, humidity, temperature) via NASA POWER Climatology and Open-Meteo APIs.
 - **📈 Advanced Yield Prediction:** Utilizes a highly trained **XGBoost Regressor** to predict estimated crop yields (Tons/Hectare) based on soil conditions, location data, and weather.
